@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>بحبك يا لوزه</title>
+
+<style>
+body{
+  margin:0;
+  background:#0b0b0b;
+  color:white;
+  font-family:Arial;
+  text-align:center;
+}
+
+/* قلب نابض */
+.heart{
+  font-size:40px;
+  animation: beat 1s infinite;
+  color:#ff4d6d;
+}
+
+@keyframes beat{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.3);}
+  100%{transform:scale(1);}
+}
+
+#login{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+
+input,button{
+  padding:12px;
+  font-size:18px;
+  border-radius:10px;
+  border:none;
+}
+
+button{
+  margin-top:10px;
+}
+
+#content{
+  display:none;
+  padding:20px;
+}
+
+#message{
+  max-width:700px;
+  margin:auto;
+  font-size:18px;
+  line-height:1.9;
+  white-space:pre-wrap;
+}
+
+/* صور */
+.slider{
+  width:300px;
+  margin:30px auto;
+}
+
+.slider img{
+  width:100%;
+  display:none;
+  border-radius:15px;
+}
+
+.slider img.active{
+  display:block;
+}
+
+.slider button{
+  margin:10px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- باسورد -->
+<div id="login">
+  <h2>🔒 دخلي الباسورد</h2>
+  <input type="password" id="pass">
+  <button onclick="check()">دخول</button>
+</div>
+
+<!-- المحتوى -->
+<div id="content">
+
+  <h1>بحبك يا لوزه</h1>
+  <div class="heart">❤️</div>
+
+  <p style="font-size:20px;">
+    📅 1/10/2008 ❤️ <br>
+    ⏳ 117 يوم <span style="color:#ff4d6d;">forever 💘♾️</span>
+  </p>
+
+  <!-- أغنية -->
+  <audio autoplay loop controls>
+    <source src="https://archive.org/download/om-kalthoum-alf-leila/Om%20Kalthoum%20-%20Alf%20Leila%20Wa%20Leila.mp3">
+  </audio>
+
+  <!-- رسالة -->
+  <div id="message"></div>
+
+  <!-- صور -->
+  <div class="slider">
+    <img src="img1.jpg" class="active">
+    <img src="img2.jpg">
+    <img src="img3.jpg">
+    <br>
+    <button onclick="prev()">⬅</button>
+    <button onclick="next()">➡</button>
+  </div>
+
+</div>
+
+<script>
+/* باسورد */
+function check(){
+  if(document.getElementById("pass").value==="692025"){
+    document.getElementById("login").style.display="none";
+    document.getElementById("content").style.display="block";
+    typeMessage();
+  }else{
+    alert("الباسورد غلط");
+  }
+}
+
+/* كتابة الرسالة */
+const text = `هلا اي يعمري عامله اي  
+بما ان طبعا مش هعرف اجيبلك حاجه عشان العيله الكريمه  
+ف يعني دي اقل حاجه اقدر اقدمهالك  
+
+المهم يعمري بصي ينونو  
+خليكي عارفه اني بحبك وبموت فيكي  
+وخليكي عارفه ان كل حاجه جت بسرعه  
+
+الماسيج دي ومعرفتش اطلع فيها كل حاجه  
+بس كل الي اقدر اقوله  
+اني بحبك وبعشقك وبموت فيكي  
+
+خليكي عارفه اني قد وعدي  
+وبحبك ومش عايز غيرك  
+
+خليكي عارفه انك احن  
+واحلا واجمل واغلا الناس عندي  
+
+ذكريات حلوه  
+وايام متتعوضش  
+
+بحبك امواااههههه 💋💋💋`;
+
+let i=0;
+function typeMessage(){
+  if(i<text.length){
+    document.getElementById("message").innerHTML+=text.charAt(i);
+    i++;
+    setTimeout(typeMessage,40);
+  }
+}
+
+/* صور */
+let index=0;
+const imgs=document.querySelectorAll(".slider img");
+
+function show(){
+  imgs.forEach(img=>img.classList.remove("active"));
+  imgs[index].classList.add("active");
+}
+
+function next(){
+  index=(index+1)%imgs.length;
+  show();
+}
+
+function prev(){
+  index=(index-1+imgs.length)%imgs.length;
+  show();
+}
+</script>
+
+</body>
+</html>
